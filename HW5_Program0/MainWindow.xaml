@@ -1,0 +1,115 @@
+﻿<Window x:Class="HW5_Program0.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HW5_Program0"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <!-- Main Grid --> 
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header / Title TextBlock-->
+        <Border Grid.Row =" 0" Grid.Column="0" Grid.ColumnSpan="2" Background="LightPink" Width="200" Height="auto" />
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text ="Student Management" Width="auto" Height=" auto" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Center" Foreground="White"/>
+
+        <!-- Grid for the Add new student form -->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.6*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.9*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Add New Student" Margin ="15, 0, 0, 0" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Foreground="DeepPink"/>
+
+            <GroupBox Header="Details" Grid.Row="1" Grid.RowSpan="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 0, 5, 0"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="First Name" VerticalAlignment="Center" Margin="15, 0, 0, 0" FontSize="13"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Last Name" VerticalAlignment="Center" Margin="15, 0, 0, 0" FontSize="13"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Date of Birth" VerticalAlignment="Center" Margin="15, 0, 0, 0" FontSize="13"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Class Standing" VerticalAlignment="Center" Margin="15, 0, 0, 0" FontSize ="13"/>
+            <TextBox x:Name ="FirstNameText" Grid.Row="2" Grid.Column="1" Margin="0, 0, 10, 5"/>
+            <TextBox x:Name ="LastNameText" Grid.Row="3" Grid.Column="1" Margin="0, 0, 10, 5"/>
+            <DatePicker x:Name ="DatePicker" Grid.Row="4" Grid.Column="1" Width="auto" Margin="0, 0, 10, 0"/>
+            <StackPanel Grid.Column="1" Grid.Row="5">
+                <StackPanel.Resources>
+                    <local:ClassStanding x:Key ="ClassStanding"/>
+                </StackPanel.Resources>
+                <ComboBox x:Name ="ClassStandingComboBox" Grid.Row="5" Grid.Column="1" Text ="Junior" ItemsSource="{StaticResource ClassStanding}" IsEditable ="True" IsReadOnly="True" Margin="0, 0, 10, 0"/>
+                <TextBlock Text="{Binding ElementName = Junior, Path=SelectedItem}"/>
+            </StackPanel>
+
+            <Expander Grid.Row="6" Grid.RowSpan ="3" Grid.Column="1" Width="200" Height ="75" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" Header=" More Info " ExpandDirection="Down" IsExpanded="False"  VerticalAlignment="Top" >
+                <Expander.Content>
+                    <ScrollViewer Height="50">
+                        <TextBlock TextWrapping="Wrap">
+                             More Student Information, I actually don't know what to include here -_-
+                        </TextBlock>
+                    </ScrollViewer>
+                </Expander.Content>
+            </Expander>
+
+
+            <GroupBox Header="Address" Grid.Row="8" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 0, 5, 0"/>
+            <TextBlock Grid.Row="9" Grid.Column="0" Text="Address"  VerticalAlignment="Center" Margin="15, 0, 0, 0" FontSize="13"/>
+            <TextBlock Grid.Row="10" Grid.Column="0" Text="City"  VerticalAlignment="Center" Margin="15, 0, 0, 0" FontSize="13"/>
+            <TextBlock Grid.Row="11" Grid.Column="0" Text="Post Code"  VerticalAlignment="Center" Margin="15, 0, 0, 0" FontSize="13"/>
+            <TextBox x:Name ="AddressText" Grid.Row="9" Grid.Column="1" Margin="0, 0, 10, 5"/>
+            <StackPanel Grid.Column="1" Grid.Row="10">
+                <StackPanel.Resources>
+                    <local:City x:Key ="City"/>
+                </StackPanel.Resources>
+                <ComboBox x:Name ="CityComboBox" Grid.Row="10" Grid.Column="1" Text ="City" ItemsSource="{StaticResource City}" IsEditable ="True" IsReadOnly="True" Margin="0, 0, 10, 5"/>
+                <TextBlock Text="{Binding ElementName = Junior, Path=SelectedItem}"/>
+            </StackPanel>
+            <TextBox x:Name ="PostCodeText" Grid.Row="11" Grid.Column="1" Margin="0, 0, 10, 5"/>
+
+            <Button x:Name="AddStudentButton" Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" Content="Add Student" FontSize="15" Width="150" Height="25" FontWeight="Bold" Background="LightPink" Foreground="White" Click="AddStudentButton_Click"/>
+        </Grid>
+
+        <!-- Grid for added students StackPanel -->
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Students" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold"/>
+            <StackPanel x:Name="StudentsStackPanel" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <Button x:Name="ImportStudentsButton" Content="Import Students" Grid.Row="2" Grid.Column="0" Width="100" Height="25" Background="HotPink" Foreground="White" Click="ImportStudentsButton_Click"/>
+            <Button x:Name="ExportStudentsButton" Content="Export Students" Grid.Row ="2" Grid.Column="1" Width="100" Height="25" Background="HotPink" Foreground="White" Click="ExportStudentsButton_Click"/>
+        </Grid>
+    </Grid>
+</Window>
